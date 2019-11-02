@@ -46,6 +46,7 @@ namespace TPR2
             _root = new Node(0, "main", 2);
             listNode.Add(_root);
             sitsName.Add(nameTB, _root);
+            sitsProp.Add(propTB, _root);
             sitsPlus.Add(plusButton, _root);
         }
         private void dravListNodes(List<Node> listN, Button logB)
@@ -76,7 +77,7 @@ namespace TPR2
                 TextBox name = new TextBox
                 {
                     Top = logButton.Top + 40,
-                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+40,
+                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+50,
                     Width = nameTB.Width,
                     Height = nameTB.Height,
                     Text = child.Name
@@ -138,7 +139,7 @@ namespace TPR2
             TextBox name = new TextBox
             {
                 Top = logicalButton.Top + 40,
-                Left = logicalButton.Left + (sitsLog[logicalButton].Down.Count - 1) * brims[sitsLog[logicalButton].Depth],
+                Left = logicalButton.Left + (sitsLog[logicalButton].Down.Count - 1) * brims[sitsLog[logicalButton].Depth]+50,
                 Width = nameTB.Width,
                 Height = nameTB.Height
             };
@@ -276,11 +277,16 @@ namespace TPR2
         }
         private void calculate_Click(object sender, EventArgs e)
         {
+            _root = listNode.First();
             Solution s = new Solution();
             s.Show();
+           
             s.textBox1.Text = _root.Falb().Replace("!!", "");
             s.textBox2.Text = _root.Fal();
             double prop = _root.CalculateProp();
+            //s.textBox1.Text = _root.Falb().Replace("!!", "");
+            //s.textBox2.Text = _root.Fal();
+            //double prop = _root.CalculateProp();
             s.textBox4.Text = prop.ToString();
         }
 
@@ -290,8 +296,7 @@ namespace TPR2
             sitsPlus.Clear();
             sitsName.Clear();
             sitsProp.Clear();
-            listNode
-                .Clear();
+            listNode.Clear();
             foreach (TextBox txtBox in this.Controls.OfType<TextBox>().Where(a => a.Name != "nameTB" && a.Name != "propTB").Select(a => a)
                 .ToArray())
                 txtBox.Dispose();
@@ -302,45 +307,45 @@ namespace TPR2
             _root = new Node(0, "main", 2);
         }
 
-        //private void save_Click(object sender, EventArgs e)
-        //{
-
-        //    if (listNode == null) { return; }
-
-        //    try
-        //    {
-        //        XmlDocument xmlDocument = new XmlDocument();
-        //        XmlSerializer serializer = new XmlSerializer(listNode.GetType());
-        //        using (MemoryStream stream = new MemoryStream())
-        //        {
-        //            serializer.Serialize(stream, listNode);
-        //            stream.Position = 0;
-        //            xmlDocument.Load(stream);
-        //            xmlDocument.Save("listNode");////////////////////
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //Log exception here
-        //    }
-        //}
-
         private void save_Click(object sender, EventArgs e)
         {
-            TextWriter writer = null;
+
+            if (listNode == null) { return; }
+
             try
             {
-                var serializer = new XmlSerializer(typeof(Node));
-                writer = new StreamWriter("D:/pro/7sem/теория принятия решений/TPR2 - master/TPR2/bin/Debug/listNode.txt", false);
-                serializer.Serialize(writer, listNode);
+                XmlDocument xmlDocument = new XmlDocument();
+                XmlSerializer serializer = new XmlSerializer(listNode.GetType());
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    serializer.Serialize(stream, listNode);
+                    stream.Position = 0;
+                    xmlDocument.Load(stream);
+                    xmlDocument.Save("listNode");////////////////////
+
+                }
             }
-            finally
+            catch (Exception ex)
             {
-                if (writer != null)
-                    writer.Close();
+                //Log exception here
             }
         }
+
+        //private void save_Click(object sender, EventArgs e)
+        //{
+        //    TextWriter writer = null;
+        //    try
+        //    {
+        //        var serializer = new XmlSerializer(typeof(Node));
+        //        writer = new StreamWriter("D:/pro/7sem/теория принятия решений/TPR2 - master/TPR2/bin/Debug/listNode.txt", false);
+        //        serializer.Serialize(writer, listNode);
+        //    }
+        //    finally
+        //    {
+        //        if (writer != null)
+        //            writer.Close();
+        //    }
+        //}
 
         private void download_Click(object sender, EventArgs e)
         {
@@ -360,46 +365,98 @@ namespace TPR2
 
 
 
-
-
-
-           // clear_Click(clear, e);
-            //nameTB.Text = "";
-            //propTB.Text = "";
-            /////////////////очистить экран
-            List<Node> liNode = new List<Node>(listNode);
-
-            clear_Click(clear, e);
-            Node _nodeMain = liNode.First();
-
-            // liNode.RemoveAt(0);////
-            nameTB.Text = _nodeMain.Name;
-            propTB.Text = _nodeMain.Property.ToString();
-            if (_nodeMain.Down.Count > 0)
+            if (string.IsNullOrEmpty("listNode"))
             {
-                //Button logButton = new Button
-                //{
-                //    Top = plusButton.Top + 40,
-                //    Left = plusButton.Left + 30,//что-нибудь про размер
-                //    Text = _nodeMain.Sel.ToString()
-                //};
+                // listNode.Clear();
+            }
+            else
+            {
+               // listNode.Clear();
+                //Node objectOut = default(Node);
+
+                ////try
+                ////{
+                ////    XmlDocument xmlDocument = new XmlDocument();
+                ////    xmlDocument.Load("listNode");
+                ////    string xmlString = xmlDocument.OuterXml;
+
+                ////    using (StringReader read = new StringReader(xmlString))
+                ////    {
+                ////        Type outType = typeof(Node);
+
+                ////        XmlSerializer serializer = new XmlSerializer(outType);
+                ////        using (XmlReader reader = new XmlTextReader(read))
+                ////        {
+                ////            listNode.Add((Node)serializer.Deserialize(reader));
+                ////            //listNode=(Node)serializer.Deserialize(reader);
+                ////        }
+                ////    }
+                ////}
+                ////catch (Exception ex)
+                ////{
+                ////    //Log exception here
+                ////}
+
+                TextReader reader = null;
+                clear_Click(clear, e);
                 try
                 {
-                    sitsPlus.Add(plusButton, _nodeMain);
+                    var serializer = new XmlSerializer(typeof(List<Node>));
+                    reader = new StreamReader("listNode");
+                    listNode= (List<Node>)serializer.Deserialize(reader);
                 }
-                catch { }
-                //sitsLog.Add(logButton, sitsPlus[plusButton]);
-                sitsName.Add(nameTB, _nodeMain);
-                sitsProp.Add(propTB, _nodeMain);
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
 
-               // logButton.Click += makeNewGroupBox;
-               // this.Controls.Add(logButton);
-                dravListNodes(liNode, plusButton);
+
+                // clear_Click(clear, e);
+                //nameTB.Text = "";
+                //propTB.Text = "";
+                /////////////////очистить экран
+                List<Node> liNode = new List<Node>(listNode);
+
+
+                //listNode =new List<Node>( liNode);
+                _root = liNode.First();
+                sitsName.Add(nameTB,_root);
+                sitsProp.Add(propTB, _root);
+                sitsPlus.Add(plusButton, _root);
+
+
+                // liNode.RemoveAt(0);////
+                nameTB.Text = _root.Name;
+                propTB.Text = _root.Property.ToString();
+                if (_root.Down.Count > 0)
+                {
+                    //Button logButton = new Button
+                    //{
+                    //    Top = plusButton.Top + 40,
+                    //    Left = plusButton.Left + 30,//что-нибудь про размер
+                    //    Text = _nodeMain.Sel.ToString()
+                    //};
+
+                    ////try
+                    ////{
+                    ////    sitsPlus.Add(plusButton, _nodeMain);
+                    ////}
+                    ////catch { }
+
+                    //sitsLog.Add(logButton, sitsPlus[plusButton]);
+                    ////sitsName.Add(nameTB, _nodeMain);
+                    ////sitsProp.Add(propTB, _nodeMain);
+
+                    // logButton.Click += makeNewGroupBox;
+                    // this.Controls.Add(logButton);
+                    dravListNodes(liNode, plusButton);
+                }
+                else { }
+                ///// вызов метода отрисовки 
+
+                liNode.Clear();
             }
-            else { }
-            ///// вызов метода отрисовки 
-
-            liNode.Clear();
         }
         //private void download_Click(object sender, EventArgs e)
         //{
