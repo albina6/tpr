@@ -1,15 +1,25 @@
 ﻿using System.Collections.Generic;
-
+using System;
+using System.IO;
+using System.Xml.Serialization;
 namespace TPR2
 {
-    class Node
+    [Serializable]
+    public class Node// : ISerializable
     {
         public double Property;
         public string Name;
         public List<Node> Down;
         public EventLogic Sel;
         public int Depth;
-        
+        public Node()
+        {
+            Property = 0;
+            Name = "";
+            Down = new List<Node>();
+            Sel = EventLogic.Or;
+            Depth = 0;
+        }
         public Node(double property, string name, int dep)
         {
             Depth = dep;

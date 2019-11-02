@@ -28,52 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.рассчитатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.calculate = new System.Windows.Forms.ToolStripMenuItem();
+            this.clear = new System.Windows.Forms.ToolStripMenuItem();
+            this.save = new System.Windows.Forms.ToolStripMenuItem();
+            this.download = new System.Windows.Forms.ToolStripMenuItem();
+            this.nameTB = new System.Windows.Forms.TextBox();
+            this.propTB = new System.Windows.Forms.TextBox();
+            this.plusButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.button1.Location = new System.Drawing.Point(560, 79);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.label1.Location = new System.Drawing.Point(515, 28);
+            this.label1.Location = new System.Drawing.Point(412, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Риск:";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(560, 27);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(120, 20);
-            this.textBox3.TabIndex = 14;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.label3.Location = new System.Drawing.Point(470, 56);
+            this.label3.Location = new System.Drawing.Point(364, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 17);
             this.label3.TabIndex = 20;
@@ -82,56 +64,83 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.рассчитатьToolStripMenuItem,
-            this.очиститьToolStripMenuItem,
-            this.выходToolStripMenuItem});
+            this.calculate,
+            this.clear,
+            this.save,
+            this.download});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1152, 24);
             this.menuStrip1.TabIndex = 23;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // рассчитатьToolStripMenuItem
+            // calculate
             // 
-            this.рассчитатьToolStripMenuItem.Name = "рассчитатьToolStripMenuItem";
-            this.рассчитатьToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.рассчитатьToolStripMenuItem.Text = "Рассчитать";
-            this.рассчитатьToolStripMenuItem.Click += new System.EventHandler(this.рассчитатьToolStripMenuItem_Click);
+            this.calculate.Name = "calculate";
+            this.calculate.Size = new System.Drawing.Size(80, 20);
+            this.calculate.Text = "Рассчитать";
+            this.calculate.Click += new System.EventHandler(this.calculate_Click);
             // 
-            // очиститьToolStripMenuItem
+            // clear
             // 
-            this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
-            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.очиститьToolStripMenuItem.Text = "Очистить";
-            this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(71, 20);
+            this.clear.Text = "Очистить";
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
-            // выходToolStripMenuItem
+            // save
             // 
-            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.выходToolStripMenuItem.Text = "Выход";
-            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(77, 20);
+            this.save.Text = "Сохранить";
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // textBox1
+            // download
             // 
-            this.textBox1.Location = new System.Drawing.Point(560, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(120, 20);
-            this.textBox1.TabIndex = 24;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.download.Name = "download";
+            this.download.Size = new System.Drawing.Size(73, 20);
+            this.download.Text = "Загрузить";
+            this.download.Click += new System.EventHandler(this.download_Click);
+            // 
+            // nameTB
+            // 
+            this.nameTB.Location = new System.Drawing.Point(457, 33);
+            this.nameTB.Name = "nameTB";
+            this.nameTB.Size = new System.Drawing.Size(100, 20);
+            this.nameTB.TabIndex = 0;
+            this.nameTB.TextChanged += new System.EventHandler(this.name_Changed);
+            // 
+            // propTB
+            // 
+            this.propTB.Location = new System.Drawing.Point(457, 59);
+            this.propTB.Name = "propTB";
+            this.propTB.Size = new System.Drawing.Size(100, 20);
+            this.propTB.TabIndex = 1;
+            this.propTB.TextChanged += new System.EventHandler(this.prop_Changed);
+            // 
+            // plusButton
+            // 
+            this.plusButton.Location = new System.Drawing.Point(457, 85);
+            this.plusButton.Name = "plusButton";
+            this.plusButton.Size = new System.Drawing.Size(100, 23);
+            this.plusButton.TabIndex = 2;
+            this.plusButton.Text = "+";
+            this.plusButton.UseVisualStyleBackColor = true;
+            this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
             // 
             // TreeMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1152, 389);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.plusButton);
+            this.Controls.Add(this.propTB);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.nameTB);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TreeMaker";
@@ -145,15 +154,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem рассчитатьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calculate;
+        private System.Windows.Forms.ToolStripMenuItem clear;
+        private System.Windows.Forms.TextBox nameTB;
+        private System.Windows.Forms.TextBox propTB;
+        private System.Windows.Forms.Button plusButton;
+        private System.Windows.Forms.ToolStripMenuItem save;
+        private System.Windows.Forms.ToolStripMenuItem download;
     }
 }
 
