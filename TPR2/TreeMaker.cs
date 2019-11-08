@@ -20,12 +20,12 @@ namespace TPR2
         int[] brims = new int[]
         {
             0,0,
-            450,
-            270,
+            470,
+            260,
             
-            100,
-            70,
-            10//если больше ?
+            73,
+            40,
+            5//если больше ?
         };
 
         Dictionary<Button, Node> sitsLog;
@@ -33,6 +33,7 @@ namespace TPR2
         Dictionary<TextBox, Node> sitsName;
         Dictionary<TextBox, Node> sitsProp;
         List<Node> listNode;
+        List<Button> listButton;
         Node _root;
         public TreeMaker()
         {
@@ -42,13 +43,57 @@ namespace TPR2
             sitsName = new Dictionary<TextBox, Node>();
             sitsProp = new Dictionary<TextBox, Node>();
             listNode = new List<Node>();
+            listButton = new List<Button>();
             _root = new Node(0, "main", 2);
             listNode.Add(_root);
             sitsName.Add(nameTB, _root);
             sitsProp.Add(propTB, _root);
             sitsPlus.Add(plusButton, _root);
         }
-        private void dravListNodes(List<Node> listN, Button logB, int chil=0)
+
+        private Button dravNode(Node child, Button logButton)
+        {
+            TextBox name = new TextBox
+            {
+                Top = logButton.Top + 40,
+                Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child) - 1) * brims[sitsLog[logButton].Depth] + 50,
+                Width = nameTB.Width,
+                Height = nameTB.Height,
+                Text = child.Name
+            };
+
+            TextBox prob = new TextBox
+            {
+                Top = name.Top + name.Height + 5,
+                Left = name.Left,
+                Width = name.Width,
+                Height = name.Height,
+                Text = child.Property.ToString()
+            };
+
+            Button add = new Button
+            {
+                Top = prob.Top + prob.Height + 1,
+                Left = name.Left,
+                Width = plusButton.Width,
+                Height = plusButton.Height,
+                Text = "+"
+            };
+
+            add.MouseClick += plusButton_Click;
+            name.TextChanged += name_Changed;
+            prob.TextChanged += prop_Changed;
+
+            sitsName.Add(name, child);
+            sitsPlus.Add(add, child);
+            sitsProp.Add(prob, child);
+            this.Controls.Add(name);
+            this.Controls.Add(prob);
+            this.Controls.Add(add);
+            return add;
+        }
+
+            private void dravListNodes(List<Node> listN, Button logB, int chil=0)
         {
             Node _node = listN.First();
             int countChildren = chil;
@@ -65,61 +110,65 @@ namespace TPR2
             while (countChildren< _node.Down.Count())
             {
                 Node child =  _node.Down.ElementAt(countChildren);
-                TextBox name = new TextBox
-                {
-                    Top = logButton.Top + 40,
-                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+50,
-                    Width = nameTB.Width,
-                    Height = nameTB.Height,
-                    Text = child.Name
-                };
-
-                TextBox prob = new TextBox
-                {
-                    Top = name.Top + name.Height + 5,
-                    Left = name.Left,
-                    Width = name.Width,
-                    Height = name.Height,
-                    Text=child.Property.ToString()
-                };
-
-                Button add = new Button
-                {
-                    Top = prob.Top + prob.Height + 1,
-                    Left = name.Left,
-                    Width = plusButton.Width,
-                    Height = plusButton.Height,
-                    Text = "+"
-                };
-
-                add.MouseClick += plusButton_Click;
-                name.TextChanged += name_Changed;
-                prob.TextChanged += prop_Changed;
-
-                sitsName.Add(name, child);
-                sitsPlus.Add(add, child);
-                sitsProp.Add(prob, child);
-                this.Controls.Add(name);
-                this.Controls.Add(prob);
-                this.Controls.Add(add);
+                listButton.Add( dravNode(child,logButton));
                 countChildren++;
-                if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
-                {
-                    listN.Remove(_node);
-                    dravListNodes(listN, add,countChildren);
+               // if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
+               // {
+               //     listN.Remove(_node);
+               //     dravListNodes(listN, add,countChildren);
                     
-                }
+               // }
                 
-               else if (listN.First().Down.Count() > 0)
-                {
-                    listN.Remove(_node);
-                    dravListNodes(listN, add);
-                }
-                   
-
+               //else if (listN.First().Down.Count() > 0)
+               // {
+               //     listN.Remove(_node);
+               //     dravListNodes(listN, add);
+               // }
             }
+            listN.RemoveAt(0);
+            dravListNodes(listN);
         }
-        private void makeNewGroupBox(object sender, EventArgs e)
+
+        private void dravListNodes(List<Node> listN)
+        {
+            Button plus = listButton.First();
+            Node _node = sitsPlus[plus] ;
+            int countChildren = 0;
+            Button logButton = new Button
+            {
+                Top = plus.Top + 40,
+                Left = plus.Left + 30,//что-нибудь про размер
+                Text = _node.Sel.ToString(),
+                Height = 23,
+                Width = 57
+            };
+            this.Controls.Add(logButton);
+            sitsLog.Add(logButton, _node);
+            while (countChildren < _node.Down.Count())
+            {
+                Node child = _node.Down.ElementAt(countChildren);
+                listButton.Add(dravNode(child, logButton));
+                countChildren++;
+                // if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
+                // {
+                //     listN.Remove(_node);
+                //     dravListNodes(listN, add,countChildren);
+
+                // }
+
+                //else if (listN.First().Down.Count() > 0)
+                // {
+                //     listN.Remove(_node);
+                //     dravListNodes(listN, add);
+                // }
+            }
+            listN.RemoveAt(0);
+            listButton.RemoveAt(0);
+            if (listButton.Count()>0&&listN.Count()>0)
+            dravListNodes(listN);
+        }
+
+            private void makeNewGroupBox(object sender, EventArgs e)
         {
             Button logicalButton = sender as Button;
             Node newsit = new Node(0, "", sitsLog[logicalButton].Depth + 1);
