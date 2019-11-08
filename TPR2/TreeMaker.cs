@@ -48,10 +48,10 @@ namespace TPR2
             sitsProp.Add(propTB, _root);
             sitsPlus.Add(plusButton, _root);
         }
-        private void dravListNodes(List<Node> listN, Button logB)
+        private void dravListNodes(List<Node> listN, Button logB, int chil=0)
         {
             Node _node = listN.First();
-            int countChildren =0 ;
+            int countChildren = chil;
             Button logButton = new Button
             {
                 Top = logB.Top + 40,
@@ -103,9 +103,19 @@ namespace TPR2
                 this.Controls.Add(prob);
                 this.Controls.Add(add);
                 countChildren++;
-                listN.Remove(_node);
-                if (listN.First().Down.Count() > 0)
-                    dravListNodes( listN, add);
+                if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
+                {
+                    listN.Remove(_node);
+                    dravListNodes(listN, add,countChildren);
+                    
+                }
+                
+               else if (listN.First().Down.Count() > 0)
+                {
+                    listN.Remove(_node);
+                    dravListNodes(listN, add);
+                }
+                   
 
             }
         }
