@@ -33,6 +33,7 @@ namespace TPR2
         Dictionary<TextBox, Node> sitsName;
         Dictionary<TextBox, Node> sitsProp;
         List<Node> listNode;
+        List<Button> listButton;
         Node _root;
         public TreeMaker()
         {
@@ -42,80 +43,101 @@ namespace TPR2
             sitsName = new Dictionary<TextBox, Node>();
             sitsProp = new Dictionary<TextBox, Node>();
             listNode = new List<Node>();
+            listButton = new List<Button>();
             _root = new Node(0, "main", 2);
             listNode.Add(_root);
             sitsName.Add(nameTB, _root);
             sitsProp.Add(propTB, _root);
             sitsPlus.Add(plusButton, _root);
         }
+
+        private Button dravNode(Node child, Button logB, int chil = 0)
+        {
+            TextBox name = new TextBox
+            {
+                Top = logB.Top + 40,
+                Left = logB.Left + (sitsLog[logB].Down.IndexOf(child) - 1) * brims[chil] + 50,
+                Width = nameTB.Width,
+                Height = nameTB.Height,
+                Text = child.Name
+            };
+
+            TextBox prob = new TextBox
+            {
+                Top = name.Top + name.Height + 5,
+                Left = name.Left,
+                Width = name.Width,
+                Height = name.Height,
+                Text = child.Property.ToString()
+            };
+
+            Button add = new Button
+            {
+                Top = prob.Top + prob.Height + 1,
+                Left = name.Left,
+                Width = plusButton.Width,
+                Height = plusButton.Height,
+                Text = "+"
+            };
+
+            add.MouseClick += plusButton_Click;
+            name.TextChanged += name_Changed;
+            prob.TextChanged += prop_Changed;
+
+            sitsName.Add(name, child);
+            sitsPlus.Add(add, child);
+            sitsProp.Add(prob, child);
+            this.Controls.Add(name);
+            this.Controls.Add(prob);
+            this.Controls.Add(add);
+            return add;
+        }
+
         private void dravListNodes(List<Node> listN, Button logB, int chil=0)
         {
             Node _node = listN.First();
             int countChildren = chil;
-            Button logButton = new Button
+            if (countChildren == 0)
             {
-                Top = logB.Top + 40,
-                Left = logB.Left + 30,//что-нибудь про размер
-                Text = _node.Sel.ToString(),
-                Height=23,
-                Width=57
-            };
-            this.Controls.Add(logButton);
-            sitsLog.Add(logButton, _node);
+                Button logButton = new Button
+                {
+                    Top = logB.Top + 40,
+                    Left = logB.Left + 30,//что-нибудь про размер
+                    Text = _node.Sel.ToString(),
+                    Height = 23,
+                    Width = 57
+                };
+                this.Controls.Add(logButton);
+                sitsLog.Add(logButton, _node);
+                logB = logButton;
+            }
+            
             while (countChildren< _node.Down.Count())
             {
-                Node child =  _node.Down.ElementAt(countChildren);
-                TextBox name = new TextBox
-                {
-                    Top = logButton.Top + 40,
-                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+50,
-                    Width = nameTB.Width,
-                    Height = nameTB.Height,
-                    Text = child.Name
-                };
-
-                TextBox prob = new TextBox
-                {
-                    Top = name.Top + name.Height + 5,
-                    Left = name.Left,
-                    Width = name.Width,
-                    Height = name.Height,
-                    Text=child.Property.ToString()
-                };
-
-                Button add = new Button
-                {
-                    Top = prob.Top + prob.Height + 1,
-                    Left = name.Left,
-                    Width = plusButton.Width,
-                    Height = plusButton.Height,
-                    Text = "+"
-                };
-
-                add.MouseClick += plusButton_Click;
-                name.TextChanged += name_Changed;
-                prob.TextChanged += prop_Changed;
-
-                sitsName.Add(name, child);
-                sitsPlus.Add(add, child);
-                sitsProp.Add(prob, child);
-                this.Controls.Add(name);
-                this.Controls.Add(prob);
-                this.Controls.Add(add);
+                Node child = _node.Down.ElementAt(countChildren);
+                listButton.Add( dravNode(child,logB,countChildren));
                 countChildren++;
-                if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
-                {
-                    listN.Remove(_node);
-                    dravListNodes(listN, add,countChildren);
-                    
-                }
-                
-               else if (listN.First().Down.Count() > 0)
-                {
-                    listN.Remove(_node);
-                    dravListNodes(listN, add);
-                }
-                   
+
+
+                // if (listN.Count>2 && (_node.Down.IndexOf(listN.ElementAt(1)) != -1))
+                // {
+                //     listN.Remove(_node);
+                //     dravListNodes(listN, add,countChildren);
+
+                // }
+
+                //else if (listN.First().Down.Count() > 0)
+                // {
+                //     listN.Remove(_node);
+                //     dravListNodes(listN, add);
+                // }      
+            }
+            listN.RemoveAt(0);
+            if (listN.Count > 0 && listButton.Count>0)
+            {
+                Button bb = listButton.First();
+                listButton.RemoveAt(0);
+                dravListNodes(listN,bb );
 
             }
         }
