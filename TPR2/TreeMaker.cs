@@ -21,9 +21,11 @@ namespace TPR2
         {
             0,0,
             450,
-            150,
-            130,
-            5//если больше ?
+            270,
+            
+            100,
+            70,
+            10//если больше ?
         };
 
         Dictionary<Button, Node> sitsLog;
@@ -54,7 +56,9 @@ namespace TPR2
             {
                 Top = logB.Top + 40,
                 Left = logB.Left + 30,//что-нибудь про размер
-                Text = _node.Sel.ToString()
+                Text = _node.Sel.ToString(),
+                Height=23,
+                Width=57
             };
             this.Controls.Add(logButton);
             sitsLog.Add(logButton, _node);
@@ -64,7 +68,7 @@ namespace TPR2
                 TextBox name = new TextBox
                 {
                     Top = logButton.Top + 40,
-                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+50,
+                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-2) * brims[sitsLog[logButton].Depth]+50,
                     Width = nameTB.Width,
                     Height = nameTB.Height,
                     Text = child.Name
@@ -100,8 +104,8 @@ namespace TPR2
                 this.Controls.Add(add);
                 countChildren++;
                 listN.Remove(_node);
-                if ( listN.First().Down.Count()>0)
-                    dravListNodes(listN, add);
+                if (listN.First().Down.Count() > 0)
+                    dravListNodes( listN, add);
 
             }
         }
@@ -158,6 +162,8 @@ namespace TPR2
             Button mPlusButton = sender as Button;
             Button logButton = new Button
             {
+                Height = 23,
+                Width = 57,
                 Top = mPlusButton.Top + 40,
                 Left = mPlusButton.Left + 30//что-нибудь про размер
             };
@@ -216,7 +222,12 @@ namespace TPR2
             foreach (Button btn in this.Controls.OfType<Button>().Where(a => a.Name != "plusButton").Select(a => a)
                 .ToArray())
                 btn.Dispose();
-            _root = new Node(0, "main", 2);
+            _root = new Node(0, "main", 2); sitsPlus.Clear();
+            sitsName.Add(nameTB,_root);
+            sitsProp.Add(nameTB,_root);
+            listNode.Add(_root);
+            nameTB.Text = "";
+            propTB.Text = "";
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -268,9 +279,9 @@ namespace TPR2
                 }
                 List<Node> liNode = new List<Node>(listNode);
                 _root = liNode.First();
-                sitsName.Add(nameTB,_root);
-                sitsProp.Add(propTB, _root);
-                sitsPlus.Add(plusButton, _root);
+                //sitsName.Add(nameTB,_root);
+                //sitsProp.Add(propTB, _root);
+                //sitsPlus.Add(plusButton, _root);
                 nameTB.Text = _root.Name;
                 propTB.Text = _root.Property.ToString();
                 if (_root.Down.Count > 0)

@@ -45,7 +45,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.label1.Location = new System.Drawing.Point(412, 36);
+            this.label1.Location = new System.Drawing.Point(586, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 17);
             this.label1.TabIndex = 19;
@@ -55,7 +55,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.label3.Location = new System.Drawing.Point(364, 62);
+            this.label3.Location = new System.Drawing.Point(538, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 17);
             this.label3.TabIndex = 20;
@@ -104,25 +104,25 @@
             // 
             // nameTB
             // 
-            this.nameTB.Location = new System.Drawing.Point(457, 33);
+            this.nameTB.Location = new System.Drawing.Point(631, 32);
             this.nameTB.Name = "nameTB";
-            this.nameTB.Size = new System.Drawing.Size(100, 20);
+            this.nameTB.Size = new System.Drawing.Size(57, 20);
             this.nameTB.TabIndex = 0;
             this.nameTB.TextChanged += new System.EventHandler(this.name_Changed);
             // 
             // propTB
             // 
-            this.propTB.Location = new System.Drawing.Point(457, 59);
+            this.propTB.Location = new System.Drawing.Point(631, 58);
             this.propTB.Name = "propTB";
-            this.propTB.Size = new System.Drawing.Size(100, 20);
+            this.propTB.Size = new System.Drawing.Size(57, 20);
             this.propTB.TabIndex = 1;
             this.propTB.TextChanged += new System.EventHandler(this.prop_Changed);
             // 
             // plusButton
             // 
-            this.plusButton.Location = new System.Drawing.Point(457, 85);
+            this.plusButton.Location = new System.Drawing.Point(631, 84);
             this.plusButton.Name = "plusButton";
-            this.plusButton.Size = new System.Drawing.Size(100, 23);
+            this.plusButton.Size = new System.Drawing.Size(57, 23);
             this.plusButton.TabIndex = 2;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = true;
@@ -133,7 +133,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1152, 389);
             this.Controls.Add(this.plusButton);
