@@ -45,11 +45,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9F);
-            this.label1.Location = new System.Drawing.Point(586, 35);
+            this.label1.Location = new System.Drawing.Point(557, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 17);
+            this.label1.Size = new System.Drawing.Size(68, 17);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Риск:";
+            this.label1.Text = "Название:";
             // 
             // label3
             // 
@@ -77,8 +77,8 @@
             // calculate
             // 
             this.calculate.Name = "calculate";
-            this.calculate.Size = new System.Drawing.Size(80, 20);
-            this.calculate.Text = "Рассчитать";
+            this.calculate.Size = new System.Drawing.Size(74, 20);
+            this.calculate.Text = "Расчитать";
             this.calculate.Click += new System.EventHandler(this.calculate_Click);
             // 
             // clear

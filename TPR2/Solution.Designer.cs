@@ -67,6 +67,7 @@
             this.label2.Size = new System.Drawing.Size(397, 19);
             this.label2.TabIndex = 11;
             this.label2.Text = "Функция вероятности реализация опасного состояния:";
+            this.label2.Visible = false;
             // 
             // textBox1
             // 
@@ -77,6 +78,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(403, 43);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Visible = false;
             // 
             // textBox2
             // 
@@ -87,6 +89,7 @@
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(403, 43);
             this.textBox2.TabIndex = 5;
+            this.textBox2.Visible = false;
             // 
             // label1
             // 
@@ -97,6 +100,7 @@
             this.label1.Size = new System.Drawing.Size(228, 19);
             this.label1.TabIndex = 12;
             this.label1.Text = "Исходная логическая функция:";
+            this.label1.Visible = false;
             // 
             // label3
             // 
@@ -156,7 +160,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(439, 374);
+            this.ClientSize = new System.Drawing.Size(439, 249);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDown1);

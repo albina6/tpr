@@ -75,7 +75,7 @@ namespace TPR2
         {
             if (Down.Count == 0)
                 return Name;
-            string form = "";
+            string form = "";//проверить
             if (Sel == EventLogic.And)
             {
                 form = "(" + Down[0].Fal();
