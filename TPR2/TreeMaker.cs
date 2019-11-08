@@ -68,7 +68,7 @@ namespace TPR2
                 TextBox name = new TextBox
                 {
                     Top = logButton.Top + 40,
-                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-2) * brims[sitsLog[logButton].Depth]+50,
+                    Left = logButton.Left + (sitsLog[logButton].Down.IndexOf(child)-1) * brims[sitsLog[logButton].Depth]+50,
                     Width = nameTB.Width,
                     Height = nameTB.Height,
                     Text = child.Name
